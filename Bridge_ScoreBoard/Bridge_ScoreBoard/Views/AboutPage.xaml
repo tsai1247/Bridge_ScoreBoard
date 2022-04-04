@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Bridge_ScoreBoard.Views.AboutPage"
+             xmlns:vm="clr-namespace:Bridge_ScoreBoard.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label TextColor="Black" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontSize="24"
+                Text="牌數："/>
+
+            <Entry x:Name="RoundNum" TextColor="Black" Grid.Row="0" Grid.Column="1" HorizontalTextAlignment="Center" 
+                   TextChanged="RoundNum_TextChanged" Keyboard="Numeric"/>
+            
+            <Button Grid.Row="1" Grid.Column="0"
+                Text="開始" Command="{Binding StartRecord}"/>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

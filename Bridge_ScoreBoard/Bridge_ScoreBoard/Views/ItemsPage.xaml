@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Bridge_ScoreBoard.Views.ItemsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Bridge_ScoreBoard.ViewModels"  
+             xmlns:model="clr-namespace:Bridge_ScoreBoard.Models" x:DataType="local:ItemsViewModel"
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Export"
+        Clicked="Export_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition x:Name="keyboardRowDef" Height="1"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView x:Name="scoreboardview" Grid.Row="0" Orientation="Both">
+            <Grid x:Name="dataGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="No." Grid.Column="0"/>
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="Dealer" Grid.Column="1"/>
+
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="Vul." Grid.Column="2"/>
+
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="合約" Grid.Column="3"/>
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="莊家" Grid.Column="4"/>
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="首引" Grid.Column="5"/>
+                <Label Grid.Row="0" TextColor="Black" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="結果" Grid.Column="6"/>
+
+                <Label Grid.Row="1" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White"  Text="南北" Grid.Column="7"/>
+                <Label Grid.Row="1" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="東西" Grid.Column="8"/>
+
+                <Label Grid.Row="0" TextColor="Black" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                       Background="White" Text="分數" Grid.Column="7"/>
+                
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Clicked="Title_Clicked" Opacity="0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Clicked="Title_Clicked" Opacity="0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Clicked="Title_Clicked" Opacity="0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Clicked="Title_Clicked" Opacity="0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" Clicked="Title_Clicked" Opacity="0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="5" Clicked="Title_Clicked" Opacity="0"/>
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="6" Clicked="Title_Clicked" Opacity="0"/>
+
+            </Grid>
+        </ScrollView>
+
+        <Grid x:Name="keyboard_content" Grid.Row="1" Margin="5" IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="1" Text="NT" Clicked="Shape_Clicked"/>
+            <Button Grid.Row="0" Grid.Column="0" Text="♠" Clicked="Shape_Clicked" FontSize="24"/>
+            <Button Grid.Row="1" Grid.Column="0" Text="♥" Clicked="Shape_Clicked" FontSize="24"/>
+            <Button Grid.Row="2" Grid.Column="0" Text="♦" Clicked="Shape_Clicked" FontSize="24"/>
+            <Button Grid.Row="3" Grid.Column="0" Text="♣" Clicked="Shape_Clicked" FontSize="24"/>
+
+            <Button Grid.Row="3" Grid.Column="1" Text="1" Clicked="Lines_Clicked"/>
+            <Button Grid.Row="3" Grid.Column="2" Text="2" Clicked="Lines_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="1" Text="3" Clicked="Lines_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="2" Text="4" Clicked="Lines_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="1" Text="5" Clicked="Lines_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="2" Text="6" Clicked="Lines_Clicked"/>
+            <Button Grid.Row="0" Grid.Column="2" Text="7" Clicked="Lines_Clicked"/>
+
+            <Button Grid.Row="0" Grid.Column="3" Text="" Clicked="Double_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="3" Text="X" Clicked="Double_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="3" Text="XX" Clicked="Double_Clicked"/>
+
+            <Button Grid.Row="3" Grid.Column="3" Text="Enter" Clicked="Enter_Clicked"/>
+        </Grid>
+
+        <Grid x:Name="keyboard_firstCard" Grid.Row="1" Margin="5" IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Text="♠" Clicked="FirstShape_Clicked" FontSize="24" Padding="0"/>
+            <Button Grid.Row="0" Grid.Column="1" Text="♥" Clicked="FirstShape_Clicked" FontSize="24" Padding="0"/>
+            <Button Grid.Row="0" Grid.Column="2" Text="♦" Clicked="FirstShape_Clicked" FontSize="24" Padding="0"/>
+            <Button Grid.Row="0" Grid.Column="3" Text="♣" Clicked="FirstShape_Clicked" FontSize="24" Padding="0"/>
+
+            <Button Grid.Row="1" Grid.Column="0" Text="2" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="1" Text="3" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="2" Text="4" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="3" Text="5" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="0" Text="6" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="1" Text="7" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="2" Text="8" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="2" Grid.Column="3" Text="9" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="3" Grid.Column="0" Text="10" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="3" Grid.Column="1" Text="J" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="3" Grid.Column="2" Text="Q" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="3" Grid.Column="3" Text="K" Clicked="FirstNum_Clicked"/>
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="A" Clicked="FirstNum_Clicked"/>
+
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="Enter" Clicked="Enter_Clicked"/>
+        </Grid>
+
+        <Grid x:Name="keyboard_result" Grid.Row="1" Margin="5" IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button FontSize="20" Grid.Row="0" Grid.Column="1" Text="1" Clicked="ResultNum_Clicked"/>
+            <Button FontSize="20" Grid.Row="0" Grid.Column="2" Text="2" Clicked="ResultNum_Clicked"/>
+            <Button FontSize="20" Grid.Row="0" Grid.Column="3" Text="3" Clicked="ResultNum_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="1" Text="4" Clicked="ResultNum_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="2" Text="5" Clicked="ResultNum_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="3" Text="6" Clicked="ResultNum_Clicked"/>
+            <Button FontSize="20" Grid.Row="2" Grid.Column="1" Text="7" Clicked="ResultNum_Clicked"/>
+
+            <Button FontSize="20" Grid.Row="0" Grid.Column="0" Text="+" Clicked="ResultSign_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="0" Text="-" Clicked="ResultSign_Clicked"/>
+            <Button FontSize="20" Grid.Row="2" Grid.Column="0" Text="=" Clicked="ResultNum_Clicked"/>
+
+            <Button FontSize="20" Grid.Row="2" Grid.Column="2" Text="←"/>
+            <Button FontSize="20" Grid.Row="2" Grid.Column="3" Text="Enter" Clicked="Enter_Clicked"/>
+        </Grid>
+
+        <Grid x:Name="keyboard_declarer" Grid.Row="1" Margin="5"  IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button FontSize="20" Grid.Row="0" Grid.Column="1" Text="N" Clicked="Declarer_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="2" Text="E" Clicked="Declarer_Clicked"/>
+            <Button FontSize="20" Grid.Row="2" Grid.Column="1" Text="S" Clicked="Declarer_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="0" Text="W" Clicked="Declarer_Clicked"/>
+            <Button FontSize="20" Grid.Row="1" Grid.Column="1" Text="Enter" Clicked="Enter_Clicked"/>
+        </Grid>
+    </Grid>
+
+    <!--<RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" x:DataType="model:Item">
+                        <Label Text="{Binding Text}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+                        <Label Text="{Binding Description}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>-->
+</ContentPage>
